@@ -7,7 +7,9 @@ TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Peter Wakefield', 'wakefp@rpi.edu'),
-    ('Sheila Porter', 'sirocelott@gmail.com')
+    ('Sheila Porter', 'sirocelott@gmail.com'),
+    ('Priti Kumar', 'kumarp3@rpi.edu'),
+    ('Aileen Sheedy', 'sheeda@rpi.edu'),
 )
 
 MANAGERS = ADMINS
