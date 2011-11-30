@@ -7,5 +7,5 @@ from django.conf import settings
 
 class UserRating(models.Model):
     user = models.ForeignKey(User)
-    rating = models.IntegerField()
+    rating = models.FloatField()
     numRatings = models.IntegerField()
