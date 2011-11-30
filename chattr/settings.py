@@ -132,6 +132,7 @@ INSTALLED_APPS = (
 	'jqchat',
 	'interests',
     'ratings',
+    'matches',
 )
 
 # A sample logging configuration. The only tangible logging
