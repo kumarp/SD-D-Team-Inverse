@@ -1,15 +1,23 @@
 {# Site Base #}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-</head>
 
-<body>
-{% block head_title %}{% endblock %}
+<head>
+<title>Chattr | {% block head_title %}{% endblock %}</title>
 {% block head %}
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
 {% endblock %}
 {% block extra_head %}{% endblock %}
+</head>
+<body>
+{% block nav %}
+<ul id="nav">
+    <li>{% block nav-home %}<a href="{% url home %}">Home</a>{% endblock %}</li>
+    <li>{% block nav-about %}<a href="https://github.com/kumarp/SD-D-Team-Inverse">About Chattr</a>{% endblock %}</li>
+    <li>{% block nav-login %}<a href="/login/">Login</a>{% endblock %}</li>
+    <li>You are logged in as {{ user }}.</li>
+</ul>
+{% endblock %}
 {% block body %}{% endblock %}
 {% block footer %}
 </body>

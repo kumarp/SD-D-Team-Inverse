@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'chattr.views.home', name='home'),
     # url(r'^chattr/', include('chattr.foo.urls')),
+    url(r'^$', 'chattr.views.home', name='home'),
 	
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

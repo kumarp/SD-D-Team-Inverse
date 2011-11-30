@@ -17,7 +17,8 @@ var IntervalID = 0;
 var prCallback = null;
 
 var rate_value = 0;
-var temp = 1;
+//var temp = 1;
+var temp;
 
 function callServer(){
 	// At each call to the server we pass data.
@@ -140,7 +141,9 @@ function InitRating(){
 	$("form#ratingform").submit(function(){
        
         rate_value = $('input:radio[name=rating]:checked').val();
-
+        temp = $('input[type=submit]', this);
+        temp.attr('disabled', 'disabled');
+        
 		$.post(url,
 				{
 				time: timestamp,
@@ -148,7 +151,7 @@ function InitRating(){
 				rating: rate_value
            		},
            		function(temp) {
-
+                    temp.attr('disabled', 'disabled');
        							},
        			'json'
        	);

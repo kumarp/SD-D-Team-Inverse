@@ -1,9 +1,8 @@
-<html>
-<head>
-<title>Interest Management</title>
-</head>
+{% extends "site_base.html" %}
 
-<body>
+{% block head_title %}Interest Management{% endblock %}
+
+{% block body %}
 
     <h1>Your Interests</h1>
     
@@ -32,6 +31,4 @@
     {% endfor %}
     </ul>
     
-</body>
-
-</html>
+{% endblock %}

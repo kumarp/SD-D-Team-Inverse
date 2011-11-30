@@ -2,6 +2,7 @@ from interestforms import NewInterestForm, AddInterestForm
 from models import UserInterestLink, Interest
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
+from django.template import RequestContext
 import datetime
 
 #view for user to manage their interests
