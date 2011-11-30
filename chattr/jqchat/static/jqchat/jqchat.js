@@ -1,6 +1,6 @@
 // Chat client code.
 
-
+/*
 // Keep track of the last message received (to avoid receiving the same message several times).
 // This global variable is updated every time a new message is received.
 var timestamp = 0;
@@ -43,12 +43,12 @@ function processResponse(payload) {
 	if(prCallback != null) prCallback(payload);
 }
 
-function InitChatWindow(ChatMessagesUrl, ProcessResponseCallback){
+function InitChatWindow(ChatMessagesUrl, ProcessResponseCallback){*/
 /**   The args to provide are:
 	- the URL to call for AJAX calls.
 	- A callback function that handles any data in the JSON payload other than the basic messages.
 	  For example, it is used in the example below to handle changes to the room's description. */
-
+/*
 	$("#loading").remove(); // Remove the dummy 'loading' message.
 
 	// Push the calling args into global variables so that they can be accessed from any function.
@@ -93,12 +93,12 @@ function InitChatWindow(ChatMessagesUrl, ProcessResponseCallback){
 
 
 } // End InitChatWindow
-
+*/
 /**	This code below is an example of how to extend the chat system.
  * It's used in the second example chat window and allows us to manage a user-updatable
  * description field.
  *  */
-
+/*
 // Callback function, processes extra data sent in server responses.
 function HandleRoomDescription(payload) {
 	$("#chatroom_description").text(payload.description);
@@ -130,4 +130,4 @@ function InitChatDescription(){
 		return false;
 	});
 
-}
+}*/

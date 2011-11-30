@@ -2,7 +2,7 @@
 
 {# An example chat window #}
 
-{% block head_title %}Chattr{% endblock %}
+{% block head_title %}Chat{% endblock %}
 
 {% block extra_head %}
 <!-- Load the JS for the chat window and start retrieving messages. -->
@@ -50,15 +50,6 @@
 	<input type="radio" name="rating" value=5 />5
 	<input type="submit" value="Submit rating" /><br />
 </form>
-<!--
-<form id="ratingform">
-	<label for="rating">Rate this user (1 = troll, 5 = awesome):</label>
-	<input type="submit" id="rating1" value="1" />
-	<input type="submit" id="rating2" value="2" />
-	<input type="submit" id="rating3" value="3" />
-	<input type="submit" id="rating4" value="4" />
-	<input type="submit" id="rating5" value="5" />
-</form>-->
 
 <div id="chatwindow"><span id="loading">Loading...</span></div>
 

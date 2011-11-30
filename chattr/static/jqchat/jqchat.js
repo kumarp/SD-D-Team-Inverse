@@ -17,6 +17,8 @@ var IntervalID = 0;
 var prCallback = null;
 
 var rate_value = 0;
+//var temp = 1;
+var temp;
 
 function callServer(){
 	// At each call to the server we pass data.
@@ -139,27 +141,21 @@ function InitRating(){
 	$("form#ratingform").submit(function(){
        
         rate_value = $('input:radio[name=rating]:checked').val();
-        //alert(rate_value);
-		// If user clicks to send a message on a empty message box, then don't do anything.
-		//if($("#id_description").val() == "") return false;
-		// We don't want to post a call at the same time as the regular message update call,
-		// so cancel that first.
-		//clearInterval(IntervalID);
+        temp = $('input[type=submit]', this);
+        temp.attr('disabled', 'disabled');
+        
 		$.post(url,
 				{
 				time: timestamp,
 				action: "rate",
 				rating: rate_value
            		},
-           		/*function(payload) {
-         						//$("#rating").val(""); // clean out contents of input field.
-         						// Calls to the server always return the latest messages, so display them.
-         						processResponse(payload);
-       							},*/
+           		function(temp) {
+                    temp.attr('disabled', 'disabled');
+       							},
        			'json'
        	);
-       	// Start calling the server again at regular intervals.
-       	//IntervalID = setInterval(callServer, CallInterval);
+
 		return false;
 		
 	});
