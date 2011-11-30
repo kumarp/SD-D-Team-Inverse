@@ -1,9 +1,8 @@
-<html>
-<head>
-<title>Interest Management</title>
-</head>
+{% extends "site_base.html" %}
 
-<body>
+{% block head_title %}Interest Management{% endblock %}
+
+{% block body %}
 
     <h1>What do you want to talk about?</h1>
     
@@ -56,6 +55,4 @@
         <p>That's fine! You'll just be matched at random.</p>
     {% endif %}
     
-</body>
-
-</html>
+{% endblock %}

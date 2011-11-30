@@ -1,0 +1,32 @@
+body{
+	font-family:Arial,Helvetica,sans-serif;
+	font-size: 12px;
+}
+
+div#nav ul
+{
+list-style-type:none;
+margin:0;
+padding:0;
+overflow:hidden;
+}
+div#nav li
+{
+float:left;
+}
+div#nav a:link, div#nav a:visited
+{
+display:block;
+width:300px;
+font-weight:bold;
+color:#FFFFFF;
+background-color:#98bf21;
+text-align:center;
+padding:4px;
+text-decoration:none;
+text-transform:uppercase;
+}
+div#nav a:hover,a:active
+{
+background-color:#7A991A;
+}

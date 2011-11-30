@@ -1,15 +1,29 @@
 {# Site Base #}
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <html lang="en">
-<head>
-</head>
 
-<body>
-{% block head_title %}{% endblock %}
+<head>
+<title>Chattr | {% block head_title %}{% endblock %}</title>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 {% block head %}
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+
 {% endblock %}
 {% block extra_head %}{% endblock %}
+<link href="/static/styles.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+{% block nav %}
+<div id="nav">
+<ul>
+    <li>{% block nav-home %}<a href="{% url home %}">Home</a>{% endblock %}</li>
+    <li><a href="https://github.com/kumarp/SD-D-Team-Inverse">About Chattr</a></li>
+    <li>{% block nav-login %}<a href="/login/">Login</a>{% endblock %}</li>
+    <li><a href="/interests/">You are logged in as {{ user }}.</a></li>
+</ul>
+</div>
+{% endblock %}
 {% block body %}{% endblock %}
 {% block footer %}
 </body>

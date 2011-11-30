@@ -2,7 +2,7 @@
 
 {# An example chat window #}
 
-{% block head_title %}Chattr{% endblock %}
+{% block head_title %}Chat{% endblock %}
 
 {% block extra_head %}
 <!-- Load the JS for the chat window and start retrieving messages. -->
@@ -10,6 +10,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		InitChatWindow("{% url jqchat_ajax room.id %}", null);
+		InitRating();
 	});
 </script>
 <style type="text/css">
@@ -40,8 +41,15 @@
 </div>
 
 <h2>You are chatting with someone who is interested in:<br />{{ room }}</h2>
-
-<h3>Rate this user:</h3>
+<form id="ratingform">
+	<label for="rating">Rate this user (1 = troll, 5 = awesome):</label>
+	<input type="radio" name="rating" value=1 />1
+	<input type="radio" name="rating" value=2 />2
+	<input type="radio" name="rating" value=3 />3
+	<input type="radio" name="rating" value=4 />4
+	<input type="radio" name="rating" value=5 />5
+	<input type="submit" value="Submit rating" /><br />
+</form>
 
 <div id="chatwindow"><span id="loading">Loading...</span></div>
 
