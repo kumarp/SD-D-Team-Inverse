@@ -115,6 +115,7 @@ TEMPLATE_DIRS = (
 	join(_dir, 'jqchat/templates/jqchat'),
 	join(_dir, 'jqchat/templates/admin/jqchat/room'),
 	join(_dir, 'auth/templates'),
+    join(_dir, 'templates'),
 )
 
 INSTALLED_APPS = (
