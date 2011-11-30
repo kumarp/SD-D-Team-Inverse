@@ -10,3 +10,4 @@ class Interest(models.Model):
 class UserInterestLink(models.Model):
     user = models.ForeignKey(User)
     interest = models.ForeignKey(Interest)
+        
