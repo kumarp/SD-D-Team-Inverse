@@ -103,8 +103,8 @@ class Ajax(object):
             # if action == 'rate':
             #   currentuser = User.objects.get(username = 'a')
             #   curr = UserRating.objects.get(user = currentuser)
+            #   curr.rating = (curr.rating * curr.numRatings + 5) / (curr.numRatings + 1)
             #   curr.numRatings += 1
-            #   curr.rating = (curr.rating * curr.numRatings + 5) / (curr.numRatings)
             #   curr.save()
             #   print UserRating.objects.get(user = currentuser).rating
             

@@ -17,7 +17,8 @@ def login_user(request):
             if user.is_active:
                 login(request, user)
                 state = "You're successfully logged in!"
-                return HttpResponseRedirect('http://www.youtube.com/watch?v=oHg5SJYRHA0')
+                #return HttpResponseRedirect('http://www.youtube.com/watch?v=oHg5SJYRHA0')
+                return HttpResponseRedirect('/interests/')
             else:
                 state = "Your account is not active. Please contact the site admin."
         else:

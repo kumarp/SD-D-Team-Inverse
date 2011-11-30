@@ -2,7 +2,7 @@
 
 {# An example chat window #}
 
-{% block head_title %}Chat Client{% endblock %}
+{% block head_title %}Chattr{% endblock %}
 
 {% block extra_head %}
 <!-- Load the JS for the chat window and start retrieving messages. -->
@@ -28,18 +28,20 @@
 
 {% block body %}
 <div id="chat_left_col">
-	<h1>Test Chat Client</h1>
-	
+	<h1>Chattr</h1>
+	<!--
 	<p>This is a demo of the <a href="http://code.google.com/p/django-jqchat/">
 	django-jqchat chat client</a>.</p>
 	<p>This page shows the basic client. For an example of how to extend it,
 	<a href="{% url jqchat_test_window_with_description room.id %}">see here</a>.</p>
 	<p>There are 2 rooms in this demo,
 	<a href="{% url jqchat_test_window 1 %}">here</a> and 
-	<a href="{% url jqchat_test_window 2 %}">here</a>.</p>
+	<a href="{% url jqchat_test_window 2 %}">here</a>.</p>-->
 </div>
 
-<h2>Room name: {{ room }}</h2>
+<h2>You are chatting with someone who is interested in:<br />{{ room }}</h2>
+
+<h3>Rate this user:</h3>
 
 <div id="chatwindow"><span id="loading">Loading...</span></div>
 
