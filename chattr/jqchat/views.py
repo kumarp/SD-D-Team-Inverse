@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.html import escape
 
 from models import Room, Message
+from chattr.ratings.models import UserRating
+from django.contrib.auth.models import User
 
 import time
 
@@ -96,7 +98,17 @@ class Ajax(object):
                 msg_text = self.request.POST['message']
     
                 if len(msg_text.strip()) > 0: # Ignore empty strings.
-                    Message.objects.create_message(self.request.user, self.ThisRoom, escape(msg_text))
+                    Message.objects.create_message(self.request.user, self.ThisRoom, escape(msg_text))     
+                    
+            # if action == 'rate':
+            #   currentuser = User.objects.get(username = 'a')
+            #   curr = UserRating.objects.get(user = currentuser)
+            #   curr.numRatings += 1
+            #   curr.rating = (curr.rating * curr.numRatings + 5) / (curr.numRatings)
+            #   curr.save()
+            #   print UserRating.objects.get(user = currentuser).rating
+            
+                
         else:
             # If a GET, make sure that no action was specified.
             if self.request.GET.get('action', None):

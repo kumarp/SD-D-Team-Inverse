@@ -131,6 +131,7 @@ INSTALLED_APPS = (
 	'timezones',
 	'jqchat',
 	'interests',
+    'ratings',
 )
 
 # A sample logging configuration. The only tangible logging
