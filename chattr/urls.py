@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+#from django.conf.urls.defaults import *
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -17,5 +18,9 @@ urlpatterns = patterns('',
 	
 	# Chat URL set
 	url(r'^', include('chattr.jqchat.urls')),
+	
+	# Login and registration URLs
+	(r'^login/$', 'auth.views.login_user'),
+	(r'^register/$', 'auth.views.register'),
 )
 
