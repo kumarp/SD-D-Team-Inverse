@@ -151,11 +151,11 @@ function InitRating(){
 				action: "rate",
 				rating: rate_value
            		},
-           		/*function(payload) {
+           		function(payload) {
          						//$("#rating").val(""); // clean out contents of input field.
          						// Calls to the server always return the latest messages, so display them.
          						processResponse(payload);
-       							},*/
+       							},
        			'json'
        	);
        	// Start calling the server again at regular intervals.
