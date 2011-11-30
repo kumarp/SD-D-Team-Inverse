@@ -18,9 +18,13 @@ urlpatterns = patterns('',
 	
 	# Chat URL set
 	url(r'^', include('chattr.jqchat.urls')),
+    
+    # Interest management URL
+    (r'^interests/$', 'interests.views.interest_manage_view'),
 	
 	# Login and registration URLs
 	(r'^login/$', 'auth.views.login_user'),
 	(r'^register/$', 'auth.views.register'),
+
 )
 

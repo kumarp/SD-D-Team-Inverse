@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>Interest Management</title>
+</head>
+
+<body>
+
+    <h1>Your Interests</h1>
+    
+    <br />
+    
+    <h2>Find an Interest</h2>
+    <form action="/interests/" method="post">{% csrf_token %}
+        {{ addinterestform.as_p }}
+        <input type="submit" value="Add" name="addinterest"/>
+    </form>
+    
+    <br />
+    
+    <h2>Add a New Interest</h2>
+    <form action="/interests/" method="post">{% csrf_token %}
+        {{ newinterestform.as_p }}
+        <input type="submit" value="Add" name="newinterest"/>
+    </form>
+    
+    <br />
+    
+    <h2>Current Interests</h2>
+    <ul>
+    {% for link in links %}
+            <li>{{ link }}</li>
+    {% endfor %}
+    </ul>
+    
+</body>
+
+</html>
