@@ -114,6 +114,7 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 	join(_dir, 'jqchat/templates/jqchat'),
 	join(_dir, 'jqchat/templates/admin/jqchat/room'),
+	join(_dir, 'auth/templates'),
 )
 
 INSTALLED_APPS = (
@@ -130,6 +131,8 @@ INSTALLED_APPS = (
 	'timezones',
 	'jqchat',
 	'interests',
+    'ratings',
+    'matches',
 )
 
 # A sample logging configuration. The only tangible logging
