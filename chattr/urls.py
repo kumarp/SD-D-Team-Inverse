@@ -25,6 +25,10 @@ urlpatterns = patterns('',
 	# Login and registration URLs
 	(r'^login/$', 'auth.views.login_user'),
 	(r'^register/$', 'auth.views.register'),
-
+    
+    # Matching handlers
+    (r'^match_any', 'matches.views.match_any'),
+    (r'^match_all', 'matches.views.match_all'),
+    (r'^match_random', 'matches.views.match_random'),
 )
 
