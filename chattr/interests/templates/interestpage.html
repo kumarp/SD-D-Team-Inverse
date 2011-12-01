@@ -6,53 +6,72 @@
 
     <h1>What do you want to talk about?</h1>
     
-    <h2>Choose an Interest</h2>
-    <p>See what other people are excited about!</p>
-    <form action="/interests/" method="post">{% csrf_token %}
-        {{ addinterestform.as_p }}
-        <input type="submit" value="Add" name="addinterest"/>
-    </form>
+    <div id="interest_left_col">
     
-    <br />
+        <div id="interest_manage">
+        
+            <h2>Choose an Interest</h2>
+            <p>See what other people are excited about!</p>
+            <form action="/interests/" method="post">{% csrf_token %}
+                {{ addinterestform.as_p }}
+                <input type="submit" value="Add" name="addinterest"/>
+            </form>
+            
+            <br />
+            
+            <h2>Add a New Interest</h2>
+            <p>Didn't see what you wanted? Start the conversation!</p>
+            <form action="/interests/" method="post">{% csrf_token %}
+                {{ newinterestform.as_p }}
+                <input type="submit" value="Add" name="newinterest"/>
+            </form>
+            
+            <br />
+            
+            <h2>Remove an Interest</h2>
+            <p>Changed your mind? Not in the mood? That's okay!</p>
+            <form action="/interests/" method="post">{% csrf_token %}
+                {{ reminterestform.as_p }}
+                <input type="submit" value="Remove" name="reminterest"/>
+            </form>
+            <br />
+        
+        </div>
+        
+    </div>
     
-    <h2>Add a New Interest</h2>
-    <p>Didn't see what you wanted? Start the conversation!</p>
-    <form action="/interests/" method="post">{% csrf_token %}
-        {{ newinterestform.as_p }}
-        <input type="submit" value="Add" name="newinterest"/>
-    </form>
+    <div id="interest_right_col">
     
-    <br />
-    
-    <h2>Remove an Interest</h2>
-    <p>Changed your mind? Not in the mood? That's okay!</p>
-    <form action="/interests/" method="post">{% csrf_token %}
-        {{ reminterestform.as_p }}
-        <input type="submit" value="Remove" name="reminterest"/>
-    </form>
-    
-    <br />
-    
-    <h2>Start Chatting</h2>
-    <p>We'll find you someone to talk to!</p>
-    <p>
-        <a href="/match_any"><button>Match all of my interests</button></a>
-        <a href="/match_all"><button>Match any of my interests</button></a>
-        <a href="/match_random"><button>Match me to a random partner</button></a>
-    </p>
-    <br />
-    
-    {% if links%}
-        <h2>Your Interests</h2>
-        <p>We'll try to match you with someone who likes...</p>
-        <ul>
-        {% for link in links %}
-                <li>{{ link.interest.name }}</li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <h2>You haven't selected any interests!</h2>
-        <p>That's fine! You'll just be matched at random.</p>
-    {% endif %}
+        <div id="start_chat">
+        
+            <h2>Start Chatting</h2>
+            <p>We'll find you someone to talk to!</p>
+            <p>
+                <a href="/match_any"><button>Match all of my interests</button></a>
+                <a href="/match_all"><button>Match any of my interests</button></a>
+                <a href="/match_random"><button>Match me to a random partner</button></a>
+            </p>
+            <br />
+        
+        </div>
+        
+        <div id="interest_list">
+        
+            {% if links%}
+                <h2>Your Interests</h2>
+                <p>We'll try to match you with someone who likes...</p>
+                <ul>
+                {% for link in links %}
+                        <li>{{ link.interest.name }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <h2>You haven't selected any interests!</h2>
+                <p>That's fine! You'll just be matched at random.</p>
+            {% endif %}
+            
+        </div>
+        
+    </div>
     
 {% endblock %}

@@ -1,0 +1,17 @@
+Chattr
+
+Allows users to chat with strangers based on common interests.
+
+This project makes use of Django v 1.3.1
+For more information about Django, see https://www.djangoproject.com/
+
+In the development of this project, we utilized django-jqchat available at: http://code.google.com/p/django-jqchat/.
+
+That code is contained in the jqchat folder, as well as the file static/jqchat/scripts/jquery.min.js
+
+In that folder, we modified the following files:
+    templates/jqchat/chat_test.html
+    static/jqchat/jqchat.js
+    views.py
+    
+    
