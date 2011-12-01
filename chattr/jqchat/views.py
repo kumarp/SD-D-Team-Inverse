@@ -114,20 +114,31 @@ class Ajax(object):
             action = self.request.POST['action']
     
             if action == 'postmsg':
+                # User is sending a message
                 msg_text = self.request.POST['message']
     
                 if len(msg_text.strip()) > 0: # Ignore empty strings.
                     Message.objects.create_message(self.request.user, self.ThisRoom, escape(msg_text))     
 
             if action == 'rate':
+                # User is rating their partner
                 rating_val = int(self.request.POST['rating'])
-                # This shouldn't actually call self.request.user --
-                # It should rate the current user's match partner
+                roomLink = RoomUsers.objects.get(room = self.ThisRoom)
                 currentuser = User.objects.get(username = self.request.user)
+                
+                # Determine which user in the roomLink is the partner
+                if roomLink.user1 == currentuser:
+                    partner = roomLink.user2
+                else:
+                    partner = roomLink.user1
+                    
+                # Get or create the UserRating link
                 try:
-                    curr = self.request.user.get_profile()
+                    curr = partner.get_profile()
                 except:
-                    curr = UserRating(user = currentuser, numRatings = 1, totalRating = 5, avgRating = 5)
+                    curr = UserRating(user = partner, numRatings = 1, totalRating = 5, avgRating = 5)
+                    
+                # Increment number of ratings, add rating to total, re-calculate average
                 curr.numRatings += 1
                 curr.totalRating += rating_val
                 curr.avgRating = float(curr.totalRating) / float(curr.numRatings)
