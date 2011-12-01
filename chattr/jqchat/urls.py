@@ -11,6 +11,9 @@ urlpatterns = patterns('',
     # Second example room - adds room descriptions.
     url(r"room_with_description/(?P<id>\d+)/$", views.WindowWithDescription, name="jqchat_test_window_with_description"),
     url(r"room_with_description/(?P<id>\d+)/ajax/$", views.WindowWithDescriptionAjaxHandler, name="jqchat_test_window_with_description_ajax"),
+    # End chat
+    url(r"room/(?P<id>\d+)/end_chat/$", views.end_chat, name="end_chat")
+
 )
 
 

@@ -5,7 +5,8 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.utils.html import escape
 
-from models import Room, Message
+from models import Room, Message, messageManager
+from chattr.matches.models import RoomUsers
 from chattr.ratings.models import UserRating
 from django.contrib.auth.models import User
 
@@ -43,15 +44,19 @@ def WindowWithDescription(request, id):
                               context_instance=RequestContext(request))
 
 #------------------------------------------------------------------------------                      
-#def end_chat(request, id):
-def end_chat(request):
+def end_chat(request, id):
     currentUser = User.objects.get(username = request.user)
-    #ThisRoom = get_object_or_404(Room, id=id)
-    #matchLink = RoomUsers.objects.get(room = ThisRoom)
+    ThisRoom = get_object_or_404(Room, id=id)
+    matchLink = RoomUsers.objects.get(room = ThisRoom)
     
-    #matchLink.expired = True
-    #matchLink.save()
+    # Mark room as expired
+    matchLink.expired = True
+    matchLink.save()
     
+    # Send "user has left chat" message
+    messageManager.create_event(messageManager(), user = request.user, room = matchLink.room, event_id = 3)
+    
+    # Redirect
     if currentUser.email == "bogus@email.com":
         return HttpResponseRedirect("/")
     else:

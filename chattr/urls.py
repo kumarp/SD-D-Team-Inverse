@@ -19,7 +19,6 @@ urlpatterns = patterns('',
 	
 	# Chat URL set
 	url(r'^', include('chattr.jqchat.urls')),
-    (r'^end_chat/$', 'jqchat.views.end_chat'),
     
     # Interest management URL
     (r'^interests/$', 'interests.views.interest_manage_view'),
