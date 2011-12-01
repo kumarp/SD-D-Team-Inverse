@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
 def login_user(request):
     state = "Please log in below..."
@@ -25,7 +26,8 @@ def login_user(request):
         else:
             state = "Your username and/or password were incorrect."
 
-    return render_to_response('login.html',{'state':state, 'username': username})
+    return render_to_response('login.html',{'state':state, 'username': username},
+                              context_instance=RequestContext(request))
 	
 def register(request):
     if request.method == 'POST':
@@ -36,9 +38,8 @@ def register(request):
     else:
         form = UserCreationForm()
 
-    return render_to_response('register.html', {
-        'form' : form
-    })
+    return render_to_response('register.html', {'form' : form}, 
+                              context_instance=RequestContext(request))
     
 def logout_user(request):
     logout(request)

@@ -134,6 +134,7 @@ INSTALLED_APPS = (
 	'interests',
     'ratings',
     'matches',
+    'auth',
 )
 
 # A sample logging configuration. The only tangible logging

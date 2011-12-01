@@ -75,4 +75,10 @@ def interest_manage_view(request):
         addinterestform = AddInterestForm(request.user)
         reminterestform = RemoveInterestForm(request.user)
 
-    return render_to_response('interestpage.html', {'addinterestform': addinterestform, 'newinterestform': newinterestform, 'reminterestform': reminterestform, 'links': interestquery})
+    return render_to_response('interestpage.html', 
+                              {'addinterestform': addinterestform,
+                               'newinterestform': newinterestform,
+                               'reminterestform': reminterestform,
+                               'links': interestquery
+                               },
+                              context_instance=RequestContext(request))
