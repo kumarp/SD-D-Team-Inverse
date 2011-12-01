@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from chattr.jqchat.models import Room
 
+#create this table
 class RoomUsers(models.Model):
     room = models.ForeignKey(Room)
     user1 = models.ForeignKey(User, related_name = 'roomusers1_set')

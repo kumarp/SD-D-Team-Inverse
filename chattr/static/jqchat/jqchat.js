@@ -136,14 +136,17 @@ function InitChatDescription(){
 
 }
 
+//Function to react to user clicking the "Submit Rating" button
 function InitRating(){
 
+    // when the POST is sent, submit
 	$("form#ratingform").submit(function(){
-       
+        // the value of the radio button clicked
         rate_value = $('input:radio[name=rating]:checked').val();
         temp = $('input[type=submit]', this);
         temp.attr('disabled', 'disabled');
         
+        // post by specifying that the post actino is rate, and the rating is the value of the rating
 		$.post(url,
 				{
 				time: timestamp,
