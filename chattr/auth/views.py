@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 def login_user(request):
     state = "Please log in below..."
@@ -39,3 +39,7 @@ def register(request):
     return render_to_response('register.html', {
         'form' : form
     })
+    
+def logout_user(request):
+    logout(request)
+    return HttpResponseRedirect('/login/')
