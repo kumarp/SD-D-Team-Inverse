@@ -1,0 +1,6 @@
+*.pyc
+*.project
+*.sqlite
+*.project
+*.pydevproject
+*.resources.prefs

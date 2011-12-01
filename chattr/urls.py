@@ -23,8 +23,9 @@ urlpatterns = patterns('',
     # Interest management URL
     (r'^interests/$', 'interests.views.interest_manage_view'),
 	
-	# Login and registration URLs
+	# Login, logout, and registration URLs
 	(r'^login/$', 'auth.views.login_user'),
+    (r'^logout/$', 'auth.views.logout_user'),
 	(r'^register/$', 'auth.views.register'),
     
     # Matching handlers

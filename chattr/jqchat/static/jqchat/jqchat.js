@@ -1,3 +1,5 @@
+//This file is not used. The file from chattr/static/jqchat/jqchat.js
+
 // Chat client code.
 
 /*
