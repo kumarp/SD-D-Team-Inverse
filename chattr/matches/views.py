@@ -77,6 +77,9 @@ def is_random(request, choices):
     # Don't include match_all rooms
     choices = choices.filter(matchAll = False)
     
+    # Don't include match_any rooms
+    choices = choices.filter(matchAny = False)
+    
     # Can't randomly select from emptyset
     if len(choices) == 0:
         return None
@@ -138,6 +141,10 @@ def match(request, get_match):
         # Flag room as match_all restricted
         if get_match == is_all:
             match.matchAll = True
+            
+        # Flag room as match_any restricted
+        if get_match == is_any:
+            match.matchAny = True
         
         match.save()
         

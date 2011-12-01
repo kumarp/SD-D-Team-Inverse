@@ -8,6 +8,7 @@ class RoomUsers(models.Model):
     user1 = models.ForeignKey(User, related_name = 'roomusers1_set')
     user2 = models.ForeignKey(User, null = True, blank=True, related_name = 'roomusers2_set')
     matchAll = models.BooleanField()
+    matchAny = models.BooleanField()
     expired = models.BooleanField()
     
     def __unicode__(self):
