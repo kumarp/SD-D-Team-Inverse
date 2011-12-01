@@ -2,27 +2,87 @@ from models import RoomUsers
 from django.contrib.auth.models import User
 from chattr.interests.models import UserInterestLink, Interest
 from chattr.ratings.models import UserRating
-from chattr.jqchat.models import Room
+from chattr.jqchat.models import Room, Message, messageManager
 
 from django.http import HttpResponse, HttpResponseRedirect
 import datetime
 import random
 
 
-# Matching conditionals - return reference to room
-# Match any: Maximal non-zero shared interest count
-def is_any(request, set):
-    return False
+# :: Matching handlers - return reference to specific room
+
+# Match any: As many common interests as possible
+def is_any(request, choices):
+    # Don't include match_all rooms
+    choices = choices.filter(matchAll = False)
+    
+    # Get user2's interests
+    u2interests = [uil.interest for uil in UserInterestLink.objects.filter(user = request.user)]
+    
+    # Loop through user1 on each RoomUser in choices
+    # Find RoomUsers with highest number of common interests
+    maxcommon = 0
+    match = None
+    for ru in choices:
+        # Get user1's interests
+        u1interests = [uil.interest for uil in UserInterestLink.objects.filter(user = ru.user1)]
+        
+        # Find how many interests they have in common
+        numcommon = 0
+        for u1i in u1interests:
+            if u1i in u2interests:
+                numcommon += 1
+        
+        # If new max, keep
+        if maxcommon < numcommon:
+            match = ru
+            maxcommon = 1
+    
+    # Return result or None if not found
+    return match
 
 # Match all: All interests shared
-def is_all(request, set):
-    return False
+def is_all(request, choices):
+    
+    # Get user2's interests
+    u2interests = [uil.interest for uil in UserInterestLink.objects.filter(user = request.user)]
+    
+    # Loop through user1 on each RoomUser in choices
+    for ru in choices:
+        # Get user1's interests
+        u1interests = [uil.interest for uil in UserInterestLink.objects.filter(user = ru.user1)]
+        
+        # Check if user1 has all of user2's interests
+        for u1i in u1interests:
+            if u1i not in u2interests:
+                continue
+        
+        # TODO: Check if user2 has all of user1's interests
+        for u2i in u2interests:
+            if u1i not in u1interests:
+                continue
+        
+        # Simpler test? Didn't seem to work
+        #if set(u1interests) == set(u2interests):
+        
+        # Interests match
+        return ru
+        
+    # No match found
+    return None
 
-# Match randomly: Disregard interests
-def is_random(request, set):
-    if len(set) == 0:
+# Match randomly: Disregard interests unless 
+def is_random(request, choices):
+    
+    # Don't include match_all rooms
+    choices = choices.filter(matchAll = False)
+    
+    # Can't randomly select from emptyset
+    if len(choices) == 0:
         return None
-    return random.choice(set)
+    
+    # TODO: Don't include match_any unless there's a shared interest
+    return random.choice(choices)
 
 
 # Perform matching, redirect
@@ -31,27 +91,41 @@ def match(request, get_match):
     # Get list of rooms waiting for a second user
     # Conditions:
     #    Only one user AND
-    #    Expired == False
+    #    Non-expired room
+    waitingset = RoomUsers.objects.filter(user2 = None, expired = False)
+    
+    
+    
+    
     
     # TODO: Sort by rating, descending
+    
     #.orderby('-user1.rating')   -- DOESN'T WORK, NEEDS USER RATING TABLE JOIN!
-    waitingset = RoomUsers.objects.filter(user2 = None, expired = False)
+    
+    
+    
+    
+    
     
     # Find all that meet requirements (all or maximal non-zero shared interest count)
     match = get_match(request, waitingset)
     
     # If match found
-    if(match):
+    if match:
         # Fill room with second user
         match.user2 = request.user
         match.save()
+
+#        # Get relevant interests list
+#        roominterests = set([uil.interest.name for uil in UserInterestLink.objects.filter(user = request.user)] +
+#                         [uil.interest.name for uil in UserInterestLink.objects.filter(user = match.user1)])
+#        
+#        # Set room name to be list of interests
+#        # TODO: Make update for user1 somehow
+#        match.room.name = 'Interests: ' +  ', '.join(roominterests)
         
-        # :: Update room with matched properties
-        
-        # Room name used as status message
-        match.room.name = 'INTERESTS HERE' # needs to be updated
-        
-        # TODO: Send action: Joined room
+        # Event: Joined room
+        messageManager.create_event(messageManager(), user = request.user, room = match.room, event_id = 2)
         
     else:
         # Create new room
@@ -60,11 +134,23 @@ def match(request, get_match):
         
         # Add user to it : RoomUsers entry with only first user
         match = RoomUsers(room = newroom, user1 = request.user)
+        
+        # Flag room as match_all restricted
+        if get_match == is_all:
+            match.matchAll = True
+        
         match.save()
         
-        # TODO: Send action: Waiting for partner
+        # Event: Joined room
+        messageManager.create_event(messageManager(), user = request.user, room = match.room, event_id = 2)
         
-        
+        # Message: Waiting for partner
+        messageManager.create_message(messageManager(), user = request.user, room = match.room,
+                                      msg = ': Waiting for a chat partner... please be patient!')
+    
+    # Message: Interests
+    messageManager.create_message(messageManager(), user = request.user, room = match.room,
+                                  msg = 'has interests: ' + ', '.join([uil.interest.name for uil in UserInterestLink.objects.filter(user = request.user)]))
     
     return HttpResponseRedirect('/room/' + str(match.room.id))
 
