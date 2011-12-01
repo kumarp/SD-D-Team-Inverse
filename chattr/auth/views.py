@@ -44,3 +44,16 @@ def register(request):
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect('/login/')
+    
+def anonymous(request):
+    user_num = User.objects.filter(username__startswith='guest_').count()
+    username = "guest_" + str(user_num)
+    user = User.objects.create_user(username, "bogus@email.com", "dummypassword")
+    user = authenticate(username=username, password="dummypassword")
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            return HttpResponseRedirect('/match_random/')
+    else:
+        return HttpResponse('Sorry, something broke. :(')
+        

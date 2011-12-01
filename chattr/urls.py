@@ -27,6 +27,7 @@ urlpatterns = patterns('',
 	(r'^login/$', 'auth.views.login_user'),
     (r'^logout/$', 'auth.views.logout_user'),
 	(r'^register/$', 'auth.views.register'),
+    (r'^anonymous/$', 'auth.views.anonymous'),
     
     # Matching handlers
     (r'^match_any', 'matches.views.match_any'),
