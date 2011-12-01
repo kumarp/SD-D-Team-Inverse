@@ -1,4 +1,4 @@
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.conf import settings
@@ -42,6 +42,20 @@ def WindowWithDescription(request, id):
     return render_to_response('jqchat/chat_test_with_desc.html', {'room': ThisRoom},
                               context_instance=RequestContext(request))
 
+#------------------------------------------------------------------------------                      
+#def end_chat(request, id):
+def end_chat(request):
+    currentUser = User.objects.get(username = request.user)
+    #ThisRoom = get_object_or_404(Room, id=id)
+    #matchLink = RoomUsers.objects.get(room = ThisRoom)
+    
+    #matchLink.expired = True
+    #matchLink.save()
+    
+    if currentUser.email == "bogus@email.com":
+        return HttpResponseRedirect("/")
+    else:
+        return HttpResponseRedirect("/interests/")
 #------------------------------------------------------------------------------
 class Ajax(object):
     """Connections from the jQuery chat client come here.
