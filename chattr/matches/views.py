@@ -98,20 +98,13 @@ def match(request, get_match):
     #waitingset = RoomUsers.objects.filter(user2 = None, expired = False)
     waitingset = RoomUsers.objects.select_related().filter(user2 = None, expired = False)
     
-    
-    
-    
-    # TODO: Sort by rating, descending
-    
+    # Sort by rating, descending
     waitingset = waitingset.order_by('-user1__userrating__avgRating')
     
     # Uncomment following lines to check if ordering worked correctly:
     
     #for i in waitingset:
     #    print i.user1.username + " " + str(i.user1.get_profile().avgRating)
-    
-    
-    
     
     
     # Find all that meet requirements (all or maximal non-zero shared interest count)
