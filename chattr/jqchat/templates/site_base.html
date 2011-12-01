@@ -1,4 +1,7 @@
 {# Site Base #}
+
+{% load auth_extras %}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <html lang="en">
@@ -19,9 +22,18 @@
 <ul>
     <li>{% block nav-home %}<a href="{% url home %}">Home</a>{% endblock %}</li>
     <li><a href="https://github.com/kumarp/SD-D-Team-Inverse">About Chattr</a></li>
-    <li>{% block nav-login %}<a href="/login/">Login</a>{% endblock %}</li>
-    <li><a href="/interests/">You are logged in as {{ user }}.</a></li>
-    <li>{% block nav-logout %}<a href="/logout/">Logout</a>{% endblock %}</li>
+    {% if user.is_authenticated %}
+        {% ifstartswith user.username "guest_" %}
+        <li><a href="/login/">Login</a></li>
+        <li><a href="/register/">Register</a></li>
+        {% else %}
+        <li><a href="/interests/">You are logged in as {{ user.username }}.</a></li>
+        <li><a href="/logout/">Logout</a></li>
+        {% endifstartswith %}
+    {% else %}
+    <li><a href="/login/">Login</a></li>
+    <li><a href="/register/">Register</a></li>
+    {% endif %}
 </ul>
 </div>
 {% endblock %}
