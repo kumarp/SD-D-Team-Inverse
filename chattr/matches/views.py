@@ -95,16 +95,20 @@ def match(request, get_match):
     # Conditions:
     #    Only one user AND
     #    Non-expired room
-    waitingset = RoomUsers.objects.filter(user2 = None, expired = False)
-    
+    #waitingset = RoomUsers.objects.filter(user2 = None, expired = False)
+    waitingset = RoomUsers.objects.select_related().filter(user2 = None, expired = False)
     
     
     
     
     # TODO: Sort by rating, descending
     
-    #.orderby('-user1.rating')   -- DOESN'T WORK, NEEDS USER RATING TABLE JOIN!
+    waitingset = waitingset.order_by('-user1__userrating__avgRating')
     
+    # Uncomment following lines to check if ordering worked correctly:
+    
+    #for i in waitingset:
+    #    print i.user1.username + " " + str(i.user1.get_profile().avgRating)
     
     
     

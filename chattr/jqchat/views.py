@@ -113,21 +113,20 @@ class Ajax(object):
     
                 if len(msg_text.strip()) > 0: # Ignore empty strings.
                     Message.objects.create_message(self.request.user, self.ThisRoom, escape(msg_text))     
-                    
+
             if action == 'rate':
                 rating_val = int(self.request.POST['rating'])
                 # This shouldn't actually call self.request.user --
                 # It should rate the current user's match partner
                 currentuser = User.objects.get(username = self.request.user)
                 try:
-                    curr = UserRating.objects.get(user = currentuser)
+                    curr = self.request.user.get_profile()
                 except:
                     curr = UserRating(user = currentuser, numRatings = 1, totalRating = 5, avgRating = 5)
                 curr.numRatings += 1
                 curr.totalRating += rating_val
                 curr.avgRating = float(curr.totalRating) / float(curr.numRatings)
                 curr.save()
-            
                 
         else:
             # If a GET, make sure that no action was specified.
