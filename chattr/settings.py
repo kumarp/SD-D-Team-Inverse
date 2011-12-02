@@ -137,6 +137,7 @@ INSTALLED_APPS = (
     'auth',
 )
 
+# User profile module
 AUTH_PROFILE_MODULE = "ratings.UserRating"
 
 # A sample logging configuration. The only tangible logging

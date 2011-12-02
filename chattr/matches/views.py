@@ -52,15 +52,24 @@ def is_all(request, choices):
         # Get user1's interests
         u1interests = [uil.interest for uil in UserInterestLink.objects.filter(user = ru.user1)]
         
+        # Assume that it'll succeed
+        failed = False
+        
         # Check if user1 has all of user2's interests
         for u1i in u1interests:
             if u1i not in u2interests:
-                continue
+                failed = True
+                break
         
-        # TODO: Check if user2 has all of user1's interests
+        # Check if user2 has all of user1's interests
         for u2i in u2interests:
-            if u1i not in u1interests:
-                continue
+            if u2i not in u1interests:
+                failed = True
+                break
+        
+        # Skip this one if it didn't match
+        if failed:
+            continue
         
         # Simpler test? Didn't seem to work
         #if set(u1interests) == set(u2interests):
@@ -84,7 +93,7 @@ def is_random(request, choices):
     if len(choices) == 0:
         return None
     
-    # TODO: Don't include match_any unless there's a shared interest
+    # Return random room
     return random.choice(choices)
 
 
@@ -95,17 +104,14 @@ def match(request, get_match):
     # Conditions:
     #    Only one user AND
     #    Non-expired room
-    #waitingset = RoomUsers.objects.filter(user2 = None, expired = False)
     waitingset = RoomUsers.objects.select_related().filter(user2 = None, expired = False)
     
     # Sort by rating, descending
     waitingset = waitingset.order_by('-user1__userrating__avgRating')
     
-    # Uncomment following lines to check if ordering worked correctly:
-    
+    # Uncomment following lines to check if ordering worked correctly:   
     #for i in waitingset:
     #    print i.user1.username + " " + str(i.user1.get_profile().avgRating)
-    
     
     # Find all that meet requirements (all or maximal non-zero shared interest count)
     match = get_match(request, waitingset)

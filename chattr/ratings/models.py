@@ -5,7 +5,7 @@ from django.contrib.contenttypes import generic
 from django.utils.safestring import mark_safe
 from django.conf import settings
 
-# create this table
+# Create the UserRating table
 class UserRating(models.Model):
     user = models.ForeignKey(User)
     numRatings = models.IntegerField()

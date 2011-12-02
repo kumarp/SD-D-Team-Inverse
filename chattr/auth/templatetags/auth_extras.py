@@ -1,3 +1,7 @@
+# Custom template tag for ifstartswith
+# Downloaded from http://djangosnippets.org/snippets/806/
+# Used in site_base.html to properly create navigation bar
+
 # -*- coding: utf-8 -*-
 
 from django import template

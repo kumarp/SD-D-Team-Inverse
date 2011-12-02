@@ -3,8 +3,8 @@ from django import forms
 from models import Interest, UserInterestLink
 from django.contrib.auth.models import User
 
-#form which creates a new interest and adds it to the user's interests
-#generated from the Interest model (see models.py)
+# Form which creates a new interest and adds it to the user's interests
+# generated from the Interest model (see models.py)
 class NewInterestForm(forms.ModelForm):
     class Meta:
         model = Interest
@@ -13,8 +13,8 @@ class NewInterestForm(forms.ModelForm):
         super (NewInterestForm, self).__init__(*args, **kwargs)
         self.fields['name'].label = ""
 
-#form which adds an existing interest to the user's interests
-#generated from the UserInterestLink model (see models.py)
+# Form which adds an existing interest to the user's interests
+# generated from the UserInterestLink model (see models.py)
 class AddInterestForm(forms.ModelForm):
     class Meta:
         model = UserInterestLink
@@ -25,14 +25,14 @@ class AddInterestForm(forms.ModelForm):
         self.fields['interest'].label = ""
         self.fields['interest'].empty_label = "--------------------------------"
         
-#form which removes an existing interest from the user's interests
-#generated from the UserInterestLink model (see models.py)
+# Form which removes an existing interest from the user's interests
+# generated from the UserInterestLink model (see models.py)
 class RemoveInterestForm(forms.Form):
     interest = forms.ModelChoiceField(UserInterestLink.objects.all())
         
     def __init__(self, user, *args, **kwargs):
         super (RemoveInterestForm, self).__init__(*args, **kwargs)
-        #limits interests in dropdown to user's current interests
+        # Limits interests in dropdown to user's current interests
         self.fields['interest'].queryset = UserInterestLink.objects.filter(user__exact=user)
         self.fields['interest'].label = ""
         self.fields['interest'].empty_label = "--------------------------------"

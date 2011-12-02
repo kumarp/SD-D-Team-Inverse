@@ -1,45 +1,50 @@
-body{
+/* CSS stylesheet */
+
+/* Body text */
+body {
 	font-family:Arial,Helvetica,sans-serif;
 	font-size: 12px;
 }
 
-div#nav ul
-{
-list-style-type:none;
-margin:0;
-padding:0;
-overflow:hidden;
-}
-div#nav li
-{
-float:left;
-}
-div#nav a:link, div#nav a:visited
-{
-display:block;
-width:300px;
-font-weight:bold;
-color:#000000;
-background-color:#00B0F0;
-text-align:center;
-padding:4px;
-text-decoration:none;
-text-transform:uppercase;
-}
-div#nav a:hover,a:active
-{
-background-color:#FFFFFF;
+/* Navigation bar list */
+div#nav ul {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    overflow:hidden;
 }
 
-div#interest_left_col
-{
-position:absolute;
-left:50px;
-top:200px;
+div#nav li {
+    float:left;
 }
-div#interest_right_col
-{
-position:absolute;
-left:500px;
-top:200px;
+
+/* Navigation bar links */
+div#nav a:link, div#nav a:visited {
+    display:block;
+    width:300px;
+    font-weight:bold;
+    color:#000000;
+    background-color:#00B0F0;
+    text-align:center;
+    padding:4px;
+    text-decoration:none;
+    text-transform:uppercase;
+}
+
+/* Navigation bar hover */
+div#nav a:hover, div#nav a:active {
+    background-color:#FFFFFF;
+}
+
+/* Interest page columns */
+div#interest_left_col {
+    position:absolute;
+    left:50px;
+    top:200px;
+}
+
+div#interest_right_col {
+    position:absolute;
+    left:500px;
+    top:200px;
 }

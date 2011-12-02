@@ -16,8 +16,8 @@ var IntervalID = 0;
 // A callback function to be called to further process each response.
 var prCallback = null;
 
+// Variables used in InitRating()
 var rate_value = 0;
-//var temp = 1;
 var temp;
 
 function callServer(){
@@ -136,17 +136,19 @@ function InitChatDescription(){
 
 }
 
-//Function to react to user clicking the "Submit Rating" button
+// Function to react to user clicking the "Submit Rating" button
 function InitRating(){
 
     // when the POST is sent, submit
 	$("form#ratingform").submit(function(){
-        // the value of the radio button clicked
+        // Get the value of the radio button clicked
         rate_value = $('input:radio[name=rating]:checked').val();
+        
+        // Disable Submit button on click
         temp = $('input[type=submit]', this);
         temp.attr('disabled', 'disabled');
         
-        // post by specifying that the post actino is rate, and the rating is the value of the rating
+        // post by specifying that the post action is "rate" and the rating is the value from the radio button
 		$.post(url,
 				{
 				time: timestamp,
@@ -154,6 +156,7 @@ function InitRating(){
 				rating: rate_value
            		},
            		function(temp) {
+                    // Disable Submit button on successful post
                     temp.attr('disabled', 'disabled');
        							},
        			'json'
